@@ -32,5 +32,6 @@ public class SimpleServidor {
     
     public void paraServidor(){
         server.stop(0);
+        
     }
 }
