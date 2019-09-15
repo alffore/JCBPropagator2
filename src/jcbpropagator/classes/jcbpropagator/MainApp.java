@@ -1,3 +1,5 @@
+// https://stackoverflow.com/questions/44973129/javafx-alert-and-stage-focus
+
 package jcbpropagator;
 
 import cbm.MemoriaC;
@@ -17,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import servidor.SimpleServidor;
 
@@ -63,17 +66,37 @@ public class MainApp extends Application {
 
         VBox vbox = new VBox(tableView);
 
-        Scene scene = new Scene(vbox);
+        Scene scene = new Scene(vbox,300,200);
 
         primaryStage.setScene(scene);
+        
+        Image imag = new Image("icono5.png");
+        primaryStage.getIcons().add(imag);
+        
+        primaryStage.setTitle("JCBPropagator");
+        
+        primaryStage.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("PrimaryStage focused : "+newValue);
+        });
 
         primaryStage.show();
     }
+    
+    
+   
 
+    /**
+     * 
+     * @throws Exception 
+     */
     public void stop() throws Exception {
         ss.paraServidor();
     }
 
+    /**
+     * 
+     * @param args 
+     */
     public static void main(String[] args) {
 
         MainApp.args = args;
