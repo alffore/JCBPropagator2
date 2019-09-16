@@ -2,9 +2,12 @@ package cliente;
 
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.*;
 import java.net.http.HttpResponse.*;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
 /**
@@ -32,6 +35,8 @@ public class SimpleCliente {
 
     /**
      * Método para enviar mensaje en forma asincrona a los clientes conectados
+     * 
+     * @param scad 
      */
     public void eviaMensaje(String scad) {
 
@@ -47,7 +52,7 @@ public class SimpleCliente {
     }
 
     /**
-     * Metodo que envia un mensaje via POST con un json
+     * Método que envia un mensaje via POST con un json
      * @param scad 
      */
     public void eviaMensaje2(String scad) {
@@ -69,5 +74,20 @@ public class SimpleCliente {
                 .thenAccept(System.out::println)
                 .join();
 
+    }
+    
+    /**
+     * 
+     * 
+     * @see https://www.urlencoder.io/java/
+     * @param value
+     * @return 
+     */
+    private static String encodeValue(String value) {
+        try {
+            return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException ex) {
+            throw new RuntimeException(ex.getCause());
+        }
     }
 }

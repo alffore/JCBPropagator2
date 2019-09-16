@@ -2,6 +2,8 @@
 
 package jcbpropagator;
 
+import cbm.ECB;
+import cbm.ManMem;
 import cbm.MemoriaC;
 import cliente.ConexionCliente;
 import com.eclipsesource.json.Json;
@@ -37,6 +39,11 @@ public class MainApp extends Application {
 
     private int clientes;
     SimpleServidor ss;
+    
+    TableView tableView;
+    
+    ManMem manm;
+    ECB ecb;
 
     /**
      *
@@ -51,15 +58,17 @@ public class MainApp extends Application {
         clientes = 0;
 
         //this.recuperaConexiones(args[0]);
-        ss = new SimpleServidor(8000);
-
-        TableView tableView = new TableView();
+        manm = new ManMem(almem);
+        ecb = new ECB(alconex,manm);
+        ss = new SimpleServidor(8000,ecb);
+        
+        tableView = new TableView();
 
         TableColumn<String, EntradaT> column1 = new TableColumn<>("Maquina");
         column1.setCellValueFactory(new PropertyValueFactory<>("snombre"));
 
         TableColumn<String, EntradaT> column2 = new TableColumn<>("Memoria");
-        column2.setCellValueFactory(new PropertyValueFactory<>("smemoria"));
+        column2.setCellValueFactory(new PropertyValueFactory<>("sbuffer"));
 
         tableView.getColumns().add(column1);
         tableView.getColumns().add(column2);
@@ -76,14 +85,12 @@ public class MainApp extends Application {
         primaryStage.setTitle("JCBPropagator");
         
         primaryStage.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("PrimaryStage focused : "+newValue);
+            recuperaUltimaMemoria(oldValue,newValue);
         });
 
         primaryStage.show();
     }
     
-    
-   
 
     /**
      * 
@@ -143,6 +150,15 @@ public class MainApp extends Application {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    private void recuperaUltimaMemoria(Boolean oldValue,Boolean newValue){
+        
+        if(newValue){
+            System.out.println("PrimaryStage focused : "+newValue+" ("+oldValue+")");
+            ecb.recuperaObjetoCB();
         }
     }
 }

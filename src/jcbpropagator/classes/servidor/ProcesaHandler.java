@@ -1,5 +1,6 @@
 package servidor;
 
+import cbm.ECB;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
@@ -11,20 +12,23 @@ import java.io.OutputStream;
  */
 public class ProcesaHandler implements HttpHandler {
 
-    int id;
+    ECB ecb;
 
-    public ProcesaHandler() {
-        id = 0;
+    public ProcesaHandler(ECB ecb) {
+        this.ecb = ecb;
     }
 
     @Override
     public void handle(HttpExchange t) throws IOException {
-        String response = " " + id;
+        String response = procesaJSON();
         t.sendResponseHeaders(200, response.length());
         try (OutputStream os = t.getResponseBody()) {
             os.write(response.getBytes());
         }
-        id++;
+
     }
 
+    private String procesaJSON() {
+        return "ok";
+    }
 }

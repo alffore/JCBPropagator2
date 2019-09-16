@@ -3,8 +3,9 @@
  */
 package servidor;
 
-import java.net.InetSocketAddress;
 
+import cbm.ECB;
+import java.net.InetSocketAddress;
 import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 
@@ -17,11 +18,13 @@ import java.io.IOException;
 public class SimpleServidor {
 
     HttpServer server;
+    
 
-    public SimpleServidor(int puerto) {
+    public SimpleServidor(int puerto,ECB ecb) {
+        
         try {
             server = HttpServer.create(new InetSocketAddress(puerto), 0);
-            server.createContext("/in", new ProcesaHandler());
+            server.createContext("/in", new ProcesaHandler(ecb));
             server.setExecutor(null);
             server.start();
         } catch (IOException ioex) {
