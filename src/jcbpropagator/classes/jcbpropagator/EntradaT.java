@@ -12,6 +12,6 @@ public class EntradaT {
     public EntradaT(){}
     
     public EntradaT(String snombre){
-        
+        this.snombre = snombre;
     }
 }
