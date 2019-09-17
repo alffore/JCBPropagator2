@@ -38,29 +38,30 @@ public class SimpleCliente {
      * 
      * @param scad 
      */
-    public void eviaMensaje(String scad) {
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(surl))
-                .build();
-
-        cliente.sendAsync(request, BodyHandlers.ofString())
-                .thenApply(HttpResponse::body)
-                .thenAccept(System.out::println)
-                .join();
-
-    }
+//    public void eviaMensaje(String scad) {
+//
+//        HttpRequest request = HttpRequest.newBuilder()
+//                .uri(URI.create(surl))
+//                .build();
+//
+//        cliente.sendAsync(request, BodyHandlers.ofString())
+//                .thenApply(HttpResponse::body)
+//                .thenAccept(System.out::println)
+//                .join();
+//
+//    }
 
     /**
      * Método que envia un mensaje via POST con un json
      * @param scad 
+     * @param smd5 
      */
-    public void eviaMensaje2(String scad) {
+    public void eviaMensaje2(String scad,String smd5) {
         
         
-        JsonObject jmessage = Json.object().add("cadena", scad);
+        JsonObject jmessage = Json.object().add("cadena", scad).add("md5", smd5);
         
-        
+        System.out.println("ENVIO: "+jmessage.toString());
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(surl))
@@ -83,11 +84,11 @@ public class SimpleCliente {
      * @param value
      * @return 
      */
-    private static String encodeValue(String value) {
-        try {
-            return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
-        } catch (UnsupportedEncodingException ex) {
-            throw new RuntimeException(ex.getCause());
-        }
-    }
+//    private static String encodeValue(String value) {
+//        try {
+//            return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+//        } catch (UnsupportedEncodingException ex) {
+//            throw new RuntimeException(ex.getCause());
+//        }
+//    }
 }

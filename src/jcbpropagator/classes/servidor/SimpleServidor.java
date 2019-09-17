@@ -33,7 +33,7 @@ public class SimpleServidor {
     }
     
     
-    public void paraServidor(){
+    public void detenerServidor(){
         server.stop(0);
         
     }

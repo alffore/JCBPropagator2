@@ -81,8 +81,8 @@ public class ECB implements ClipboardOwner, FlavorListener {
 
             MemoriaC mem = mm.insertaMem(0, scad);
 
-            for (var c : asc) {
-                c.eviaMensaje2(scad);
+            for (SimpleCliente c : asc) {
+                c.eviaMensaje2(scad,mem.md5);
                 System.out.println("\t" + c.surl + " " + scad);
             }
 

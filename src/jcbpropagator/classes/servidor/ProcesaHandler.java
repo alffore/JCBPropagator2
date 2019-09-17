@@ -52,6 +52,7 @@ public class ProcesaHandler implements HttpHandler {
         //return sb.toString();
         System.out.println("RECIBIO: "+sb.toString());
 
-        return "Respuesta "+sb.toString();
+        //return "Respuesta "+sb.toString();
+        return "ok";
     }
 }

@@ -138,7 +138,7 @@ public class MainApp extends Application {
      * @throws Exception 
      */
     public void stop() throws Exception {
-        ss.paraServidor();
+        ss.detenerServidor();
     }
 
     /**
