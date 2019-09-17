@@ -43,7 +43,7 @@ public class MainApp extends Application {
     private static final double DEFAULT_WIDTH = 300;
     private static final double DEFAULT_HEIGHT = 200;
     private static final String NODE_NAME = "MainApp";
-    private static final String BUNDLE = "Bundle";
+    
     
     
     private static String[] args;
@@ -72,12 +72,16 @@ public class MainApp extends Application {
         alconex = new ArrayList<>();
         clientes = 0;
 
-        //this.recuperaConexiones(args[0]);
-        manm = new ManMem(almem);
-        ecb = new ECB(alconex,manm);
-        ss = new SimpleServidor(8000,ecb);
         
         tableView = new TableView();
+        
+        
+        //this.recuperaConexiones(args[0]);
+        manm = new ManMem(almem);
+        ecb = new ECB(alconex,manm,tableView);
+        ss = new SimpleServidor(8000,ecb);
+        
+        
 
         TableColumn<String, EntradaT> column1 = new TableColumn<>("Maquina");
         column1.setCellValueFactory(new PropertyValueFactory<>("snombre"));
@@ -190,7 +194,11 @@ public class MainApp extends Application {
         }
     }
     
-    
+    /**
+     * 
+     * @param oldValue
+     * @param newValue 
+     */
     private void recuperaUltimaMemoria(Boolean oldValue,Boolean newValue){
         
         if(newValue){

@@ -10,6 +10,7 @@ import java.awt.datatransfer.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.*;
+import javafx.scene.control.TableView;
 
 /**
  *
@@ -24,16 +25,18 @@ public class ECB implements ClipboardOwner, FlavorListener {
     ArrayList<ConexionCliente> acc;
 
     ManMem mm;
+    TableView tv;
 
     /**
      *
      * @param acc
      * @param almem
      */
-    public ECB(ArrayList<ConexionCliente> acc, ManMem mm) {
+    public ECB(ArrayList<ConexionCliente> acc, ManMem mm, TableView tv) {
 
         this.acc = acc;
         this.mm = mm;
+        this.tv=tv;
 
         asc = new ArrayList<>();
 
