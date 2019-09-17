@@ -1,4 +1,5 @@
 // https://stackoverflow.com/questions/44973129/javafx-alert-and-stage-focus
+// http://broadlyapplicable.blogspot.com/2015/02/javafx-restore-window-size-position.html
 
 package jcbpropagator;
 
@@ -23,7 +24,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import servidor.SimpleServidor;
+import java.util.prefs.Preferences;
 
 /**
  *
@@ -31,6 +34,18 @@ import servidor.SimpleServidor;
  */
 public class MainApp extends Application {
 
+    private static final String WINDOW_POSITION_X = "Window_Position_X";
+    private static final String WINDOW_POSITION_Y = "Window_Position_Y";
+    private static final String WINDOW_WIDTH = "Window_Width";
+    private static final String WINDOW_HEIGHT = "Window_Height";
+    private static final double DEFAULT_X = 10;
+    private static final double DEFAULT_Y = 10;
+    private static final double DEFAULT_WIDTH = 300;
+    private static final double DEFAULT_HEIGHT = 200;
+    private static final String NODE_NAME = "MainApp";
+    private static final String BUNDLE = "Bundle";
+    
+    
     private static String[] args;
 
     ArrayList<MemoriaC> almem;
@@ -76,6 +91,19 @@ public class MainApp extends Application {
         VBox vbox = new VBox(tableView);
 
         Scene scene = new Scene(vbox,300,200);
+        
+        //recupera preferencias
+        Preferences pref = Preferences.userRoot().node(NODE_NAME);
+        double x = pref.getDouble(WINDOW_POSITION_X, DEFAULT_X);
+        double y = pref.getDouble(WINDOW_POSITION_Y, DEFAULT_Y);
+        double width = pref.getDouble(WINDOW_WIDTH, DEFAULT_WIDTH);
+        double height = pref.getDouble(WINDOW_HEIGHT, DEFAULT_HEIGHT);
+        primaryStage.setX(x);
+        primaryStage.setY(y);
+        primaryStage.setWidth(width);
+        primaryStage.setHeight(height);
+        
+       
 
         primaryStage.setScene(scene);
         
@@ -86,6 +114,15 @@ public class MainApp extends Application {
         
         primaryStage.focusedProperty().addListener((observable, oldValue, newValue) -> {
             recuperaUltimaMemoria(oldValue,newValue);
+        });
+        
+        // guarda configuracion de posicion y tamaño
+        primaryStage.setOnCloseRequest((final WindowEvent event) -> {
+        Preferences preferences = Preferences.userRoot().node(NODE_NAME);
+            preferences.putDouble(WINDOW_POSITION_X, primaryStage.getX());
+            preferences.putDouble(WINDOW_POSITION_Y, primaryStage.getY());
+            preferences.putDouble(WINDOW_WIDTH, primaryStage.getWidth());
+            preferences.putDouble(WINDOW_HEIGHT, primaryStage.getHeight());
         });
 
         primaryStage.show();

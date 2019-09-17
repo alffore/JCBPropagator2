@@ -5,13 +5,15 @@ module jcbpropagator {
     requires javafx.controls;
     requires javafx.fxml;
     
+    requires java.prefs;
+   
     requires java.base;
     requires java.desktop;
     requires java.logging;
     requires java.net.http;
     requires jdk.httpserver;
     
-    opens jcbpropagator to javafx.fxml,javafx.base;
+    opens jcbpropagator to javafx.fxml,javafx.base,java.prefs;
     exports jcbpropagator;
     
     
