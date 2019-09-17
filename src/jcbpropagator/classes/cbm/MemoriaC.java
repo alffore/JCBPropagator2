@@ -11,7 +11,7 @@ public class MemoriaC {
     
     public long idm=0;
     
-    public String ip;
+    public String ip="";
     
     public String snombre;
     

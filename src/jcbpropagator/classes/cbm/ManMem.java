@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ManMem {
 
     private long idm;
-    ArrayList<MemoriaC> almem;
+    public ArrayList<MemoriaC> almem;
 
     /**
      *
@@ -75,6 +75,33 @@ public class ManMem {
         return mem;
     }
 
+    /**
+     * 
+     * @param scad
+     * @param md5
+     * @param ip
+     * @return 
+     */
+    public MemoriaC insertaMemExt(String scad,String md5,String ip){
+        
+        for (var m : almem) {
+            if(m.md5.equals(md5) && m.ip.equals(ip)){
+                return m;
+            }
+        }
+        
+        MemoriaC mem = new MemoriaC();
+        mem.idm = this.obtenIdm();
+        mem.sbuffer = scad;
+        mem.md5 = md5;
+        
+        almem.add(mem);
+        
+        return mem;
+    }
+    
+    
+    
     /**
      *
      * @return

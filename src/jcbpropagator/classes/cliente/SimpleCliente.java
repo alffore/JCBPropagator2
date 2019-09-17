@@ -33,23 +33,6 @@ public class SimpleCliente {
         cliente = HttpClient.newHttpClient();
     }
 
-    /**
-     * Método para enviar mensaje en forma asincrona a los clientes conectados
-     * 
-     * @param scad 
-     */
-//    public void eviaMensaje(String scad) {
-//
-//        HttpRequest request = HttpRequest.newBuilder()
-//                .uri(URI.create(surl))
-//                .build();
-//
-//        cliente.sendAsync(request, BodyHandlers.ofString())
-//                .thenApply(HttpResponse::body)
-//                .thenAccept(System.out::println)
-//                .join();
-//
-//    }
 
     /**
      * Método que envia un mensaje via POST con un json
@@ -73,22 +56,9 @@ public class SimpleCliente {
         cliente.sendAsync(request, BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
                 .thenAccept(System.out::println)
-                .join();
+                ;//.join();
 
     }
     
-    /**
-     * 
-     * 
-     * @see https://www.urlencoder.io/java/
-     * @param value
-     * @return 
-     */
-//    private static String encodeValue(String value) {
-//        try {
-//            return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
-//        } catch (UnsupportedEncodingException ex) {
-//            throw new RuntimeException(ex.getCause());
-//        }
-//    }
+
 }

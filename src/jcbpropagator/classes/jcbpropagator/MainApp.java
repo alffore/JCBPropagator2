@@ -154,7 +154,7 @@ public class MainApp extends Application {
     }
 
     /**
-     *
+     * Método que procesa el archivo de configuracion JSON
      * @param sarchivo
      */
     private void recuperaConexiones(String sarchivo) {
@@ -167,7 +167,7 @@ public class MainApp extends Application {
             char[] buffer = new char[8096];
             int numberOfCharsRead = mifr.read(buffer);
             String sjson = String.valueOf(buffer, 0, numberOfCharsRead);
-            System.out.println(numberOfCharsRead + ":: " + sjson);
+            //System.out.println(numberOfCharsRead + ":: " + sjson);
 
             JsonArray items = Json.parse(sjson).asArray();
 
@@ -206,7 +206,7 @@ public class MainApp extends Application {
     private void recuperaUltimaMemoria(Boolean oldValue,Boolean newValue){
         
         if(newValue){
-            System.out.println("PrimaryStage focused : "+newValue+" ("+oldValue+")");
+            //System.out.println("PrimaryStage focused : "+newValue+" ("+oldValue+")");
             ecb.recuperaObjetoCB();
         }
     }

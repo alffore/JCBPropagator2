@@ -1,6 +1,9 @@
 package servidor;
 
 import cbm.ECB;
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.BufferedReader;
@@ -8,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
 
 /**
  *
@@ -23,7 +27,7 @@ public class ProcesaHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange t) throws IOException {
-        String response = procesaJSON(t.getRequestBody());
+        String response = procesaJSON(t.getRequestBody(),t.getRemoteAddress());
         t.sendResponseHeaders(200, response.length());
         try (OutputStream os = t.getResponseBody()) {
             os.write(response.getBytes());
@@ -39,7 +43,7 @@ public class ProcesaHandler implements HttpHandler {
      * @return
      * @throws IOException 
      */
-    private String procesaJSON(InputStream in) throws IOException {
+    private String procesaJSON(InputStream in,InetSocketAddress ip) throws IOException {
 
         StringBuilder sb = new StringBuilder();
 
@@ -52,7 +56,13 @@ public class ProcesaHandler implements HttpHandler {
         //return sb.toString();
         System.out.println("RECIBIO: "+sb.toString());
 
-        //return "Respuesta "+sb.toString();
+        JsonObject jsono =Json.parse(sb.toString()).asObject();
+        jsono.add("ip", ip.getAddress().getHostAddress());
+        
+        ecb.ponMemoria(jsono);
+        
+        
+        
         return "ok";
     }
 }
