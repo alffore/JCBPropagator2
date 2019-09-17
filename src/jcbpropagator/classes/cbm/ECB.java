@@ -36,7 +36,7 @@ public class ECB implements ClipboardOwner, FlavorListener {
 
         this.acc = acc;
         this.mm = mm;
-        this.tv=tv;
+        this.tv = tv;
 
         asc = new ArrayList<>();
 
@@ -61,9 +61,11 @@ public class ECB implements ClipboardOwner, FlavorListener {
      */
     private void creaClientes() {
         for (var cc : acc) {
-            String surl = "http://" + cc.sip + ":" + cc.puerto + "/in";
-            var aux = new SimpleCliente(surl);
-            asc.add(aux);
+            if ("cliente".equals(cc.stipo)) {
+                String surl = "http://" + cc.sip + ":" + cc.puerto + "/in";
+                var aux = new SimpleCliente(surl);
+                asc.add(aux);
+            }
         }
     }
 
@@ -77,10 +79,10 @@ public class ECB implements ClipboardOwner, FlavorListener {
             String scad = (String) cb.getData(DataFlavor.stringFlavor);
             System.out.println("se recupera String de CB local: " + scad + ", " + getMd5(scad));
 
-            MemoriaC mem =mm.insertaMem(0, scad);
-            
+            MemoriaC mem = mm.insertaMem(0, scad);
+
             for (var c : asc) {
-                //c.eviaMensaje(scad);
+                c.eviaMensaje2(scad);
                 System.out.println("\t" + c.surl + " " + scad);
             }
 

@@ -12,6 +12,7 @@ public class ConexionCliente {
     public String snombre;
     public String sip;
     public int puerto;
+    public String stipo;
     
     @Override
     public String toString(){

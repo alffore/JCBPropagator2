@@ -76,7 +76,7 @@ public class MainApp extends Application {
         tableView = new TableView();
         
         
-        //this.recuperaConexiones(args[0]);
+        this.recuperaConexiones(args[0]);
         manm = new ManMem(almem);
         ecb = new ECB(alconex,manm,tableView);
         ss = new SimpleServidor(8000,ecb);
@@ -158,6 +158,10 @@ public class MainApp extends Application {
      * @param sarchivo
      */
     private void recuperaConexiones(String sarchivo) {
+        if(sarchivo== null || sarchivo.length()==0){
+            return;
+        }
+        
         try {
             FileReader mifr = new FileReader(sarchivo);
             char[] buffer = new char[8096];
@@ -175,7 +179,7 @@ public class MainApp extends Application {
                 cc.snombre = item.asObject().getString("nombre", "Indefinido");
                 cc.sip = item.asObject().getString("ip", "");
                 cc.puerto = item.asObject().getInt("puerto", 8000);
-
+                cc.stipo = item.asObject().getString("tipo","cliente");
                 alconex.add(cc);
 
                 clientes++;

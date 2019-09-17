@@ -58,7 +58,7 @@ public class SimpleCliente {
     public void eviaMensaje2(String scad) {
         
         
-        JsonObject jmessage = Json.object().add("cadena", scad).add("points", 23);
+        JsonObject jmessage = Json.object().add("cadena", scad);
         
         
 
