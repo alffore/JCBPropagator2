@@ -86,7 +86,7 @@ public class ECB implements ClipboardOwner, FlavorListener {
             ponEntradasTV();
             
             for (SimpleCliente c : asc) {
-                //c.eviaMensaje2(scad,mem.md5);
+                c.eviaMensaje2(scad,mem.md5);
                 System.out.println("\t" + c.surl + " " + scad);
             }
 
