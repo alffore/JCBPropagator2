@@ -1,6 +1,5 @@
 // https://stackoverflow.com/questions/44973129/javafx-alert-and-stage-focus
 // http://broadlyapplicable.blogspot.com/2015/02/javafx-restore-window-size-position.html
-
 package jcbpropagator;
 
 import cbm.ECB;
@@ -27,6 +26,8 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import servidor.SimpleServidor;
 import java.util.prefs.Preferences;
+import javafx.scene.control.TableRow;
+import javafx.scene.input.MouseButton;
 
 /**
  *
@@ -43,9 +44,7 @@ public class MainApp extends Application {
     private static final double DEFAULT_WIDTH = 300;
     private static final double DEFAULT_HEIGHT = 200;
     private static final String NODE_NAME = "MainApp";
-    
-    
-    
+
     private static String[] args;
 
     ArrayList<MemoriaC> almem;
@@ -54,9 +53,9 @@ public class MainApp extends Application {
 
     private int clientes;
     SimpleServidor ss;
-    
+
     TableView tableView;
-    
+
     ManMem manm;
     ECB ecb;
 
@@ -72,16 +71,12 @@ public class MainApp extends Application {
         alconex = new ArrayList<>();
         clientes = 0;
 
-        
         tableView = new TableView();
-        
-        
+
         this.recuperaConexiones(args[0]);
         manm = new ManMem(almem);
-        ecb = new ECB(alconex,manm,tableView);
-        ss = new SimpleServidor(8000,ecb);
-        
-        
+        ecb = new ECB(alconex, manm, tableView);
+        ss = new SimpleServidor(8000, ecb);
 
         TableColumn<String, EntradaT> column1 = new TableColumn<>("Maquina");
         column1.setCellValueFactory(new PropertyValueFactory<>("snombre"));
@@ -92,10 +87,33 @@ public class MainApp extends Application {
         tableView.getColumns().add(column1);
         tableView.getColumns().add(column2);
 
+//        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+//            if (newSelection != null) {
+//
+//            }
+//        });
+
+    //https://stackoverflow.com/questions/30191264/javafx-tableview-how-to-get-the-row-i-clicked
+        tableView.setRowFactory(tv -> {
+            TableRow<EntradaT> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
+                        && event.getClickCount() == 2) {
+
+                    EntradaT clickedRow = row.getItem();
+                    System.out.println("Para CB: "+clickedRow.getSnombre()+"::"+clickedRow.getSbuffer());
+                    ecb.copiaaCB(clickedRow.getSbuffer());
+                }
+            });
+            return row;
+        });
+
+
+
         VBox vbox = new VBox(tableView);
 
-        Scene scene = new Scene(vbox,300,200);
-        
+        Scene scene = new Scene(vbox, 300, 200);
+
         //recupera preferencias
         Preferences pref = Preferences.userRoot().node(NODE_NAME);
         double x = pref.getDouble(WINDOW_POSITION_X, DEFAULT_X);
@@ -106,23 +124,21 @@ public class MainApp extends Application {
         primaryStage.setY(y);
         primaryStage.setWidth(width);
         primaryStage.setHeight(height);
-        
-       
 
         primaryStage.setScene(scene);
-        
+
         Image imag = new Image("icono5.png");
         primaryStage.getIcons().add(imag);
-        
+
         primaryStage.setTitle("JCBPropagator");
-        
+
         primaryStage.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            recuperaUltimaMemoria(oldValue,newValue);
+            recuperaUltimaMemoria(oldValue, newValue);
         });
-        
+
         // guarda configuracion de posicion y tamaño
         primaryStage.setOnCloseRequest((final WindowEvent event) -> {
-        Preferences preferences = Preferences.userRoot().node(NODE_NAME);
+            Preferences preferences = Preferences.userRoot().node(NODE_NAME);
             preferences.putDouble(WINDOW_POSITION_X, primaryStage.getX());
             preferences.putDouble(WINDOW_POSITION_Y, primaryStage.getY());
             preferences.putDouble(WINDOW_WIDTH, primaryStage.getWidth());
@@ -131,19 +147,18 @@ public class MainApp extends Application {
 
         primaryStage.show();
     }
-    
 
     /**
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     public void stop() throws Exception {
         ss.detenerServidor();
     }
 
     /**
-     * 
-     * @param args 
+     *
+     * @param args
      */
     public static void main(String[] args) {
 
@@ -155,13 +170,14 @@ public class MainApp extends Application {
 
     /**
      * Método que procesa el archivo de configuracion JSON
+     *
      * @param sarchivo
      */
     private void recuperaConexiones(String sarchivo) {
-        if(sarchivo== null || sarchivo.length()==0){
+        if (sarchivo == null || sarchivo.length() == 0) {
             return;
         }
-        
+
         try {
             FileReader mifr = new FileReader(sarchivo);
             char[] buffer = new char[8096];
@@ -179,7 +195,7 @@ public class MainApp extends Application {
                 cc.snombre = item.asObject().getString("nombre", "Indefinido");
                 cc.sip = item.asObject().getString("ip", "");
                 cc.puerto = item.asObject().getInt("puerto", 8000);
-                cc.stipo = item.asObject().getString("tipo","cliente");
+                cc.stipo = item.asObject().getString("tipo", "cliente");
                 alconex.add(cc);
 
                 clientes++;
@@ -197,17 +213,18 @@ public class MainApp extends Application {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
-     * 
+     *
      * @param oldValue
-     * @param newValue 
+     * @param newValue
      */
-    private void recuperaUltimaMemoria(Boolean oldValue,Boolean newValue){
-        
-        if(newValue){
+    private void recuperaUltimaMemoria(Boolean oldValue, Boolean newValue) {
+
+        if (newValue) {
             //System.out.println("PrimaryStage focused : "+newValue+" ("+oldValue+")");
             ecb.recuperaObjetoCB();
         }
     }
+
 }
