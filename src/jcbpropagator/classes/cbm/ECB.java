@@ -102,7 +102,7 @@ public class ECB implements ClipboardOwner, FlavorListener {
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents) {
         Logger.getLogger(ECB.class.getName()).log(Level.INFO, null, clipboard);
-        System.out.println("Se perdio la propiedad del CB");
+        //System.out.println("Se perdio la propiedad del CB");
         this.recuperaObjetoCB();
     }
 
@@ -111,10 +111,19 @@ public class ECB implements ClipboardOwner, FlavorListener {
      */
     public void ponEntradasTV() {
         tableView.getItems().clear();
+        
+        var tam = mm.almem.size();
+        /*
         for (var m : mm.almem) {
-            //if(m.cliente_id!=0){
-            tableView.getItems().add(new EntradaT(m.snombre, m.sbuffer));
+            //if (m.cliente_id != 0) {
+                tableView.getItems().add(new EntradaT(m.snombre, m.sbuffer));
             //}
+        }
+        */
+        
+        for(var i=tam-1;i>=0;i--){
+            var m=mm.almem.get(i);
+            tableView.getItems().add(new EntradaT(m.ip, m.sbuffer));
         }
     }
 
@@ -123,10 +132,10 @@ public class ECB implements ClipboardOwner, FlavorListener {
         this.ponEntradasTV();
     }
 
-    
     /**
      * Metodo que copia un contenido de la tabla al clipboard
-     * @param scad 
+     *
+     * @param scad
      */
     public void copiaaCB(String scad) {
         StringSelection data = new StringSelection(scad);

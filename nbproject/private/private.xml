@@ -3,16 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/alfonso/Documents/GitHub/JCBPropagator2/src/jcbpropagator/classes/cbm/ECB.java</file>
-            <file>file:/Users/alfonso/Documents/GitHub/JCBPropagator2/src/jcbpropagator/classes/cliente/SimpleCliente.java</file>
-            <file>file:/Users/alfonso/Documents/GitHub/JCBPropagator2/src/jcbpropagator/classes/jcbpropagator/MainApp.java</file>
-            <file>file:/Users/alfonso/Documents/GitHub/JCBPropagator2/src/jcbpropagator/classes/module-info.java</file>
-            <file>file:/Users/alfonso/Documents/GitHub/JCBPropagator2/config.json</file>
-            <file>file:/Users/alfonso/Documents/GitHub/JCBPropagator2/src/jcbpropagator/classes/cbm/MemoriaC.java</file>
-            <file>file:/Users/alfonso/Documents/GitHub/JCBPropagator2/src/jcbpropagator/classes/cbm/ManMem.java</file>
-            <file>file:/Users/alfonso/Documents/GitHub/JCBPropagator2/src/jcbpropagator/classes/jcbpropagator/EntradaT.java</file>
-            <file>file:/Users/alfonso/Documents/GitHub/JCBPropagator2/src/jcbpropagator/classes/servidor/ProcesaHandler.java</file>
-            <file>file:/Users/alfonso/Documents/GitHub/JCBPropagator2/src/jcbpropagator/classes/com/eclipsesource/json/Json.java</file>
+            <file>file:/home/alfonso/devel/JCBPropagator2/src/jcbpropagator/classes/jcbpropagator/MainApp.java</file>
+            <file>file:/home/alfonso/devel/JCBPropagator2/src/jcbpropagator/classes/cbm/MemoriaC.java</file>
+            <file>file:/home/alfonso/devel/JCBPropagator2/src/jcbpropagator/classes/servidor/ProcesaHandler.java</file>
+            <file>file:/home/alfonso/devel/JCBPropagator2/config.json</file>
+            <file>file:/home/alfonso/devel/JCBPropagator2/src/jcbpropagator/classes/jcbpropagator/EntradaT.java</file>
+            <file>file:/home/alfonso/devel/JCBPropagator2/src/jcbpropagator/classes/cbm/ECB.java</file>
+            <file>file:/home/alfonso/devel/JCBPropagator2/src/jcbpropagator/classes/com/eclipsesource/json/Json.java</file>
+            <file>file:/home/alfonso/devel/JCBPropagator2/src/jcbpropagator/classes/cliente/SimpleCliente.java</file>
+            <file>file:/home/alfonso/devel/JCBPropagator2/src/jcbpropagator/classes/com/eclipsesource/json/JsonArray.java</file>
+            <file>file:/home/alfonso/devel/JCBPropagator2/src/jcbpropagator/classes/servidor/SimpleServidor.java</file>
+            <file>file:/home/alfonso/devel/JCBPropagator2/src/jcbpropagator/classes/cbm/ManMem.java</file>
+            <file>file:/home/alfonso/devel/JCBPropagator2/src/jcbpropagator/classes/cliente/ConexionCliente.java</file>
         </group>
     </open-files>
 </project-private>

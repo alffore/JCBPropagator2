@@ -78,22 +78,17 @@ public class MainApp extends Application {
         ecb = new ECB(alconex, manm, tableView);
         ss = new SimpleServidor(8000, ecb);
 
-        TableColumn<String, EntradaT> column1 = new TableColumn<>("Maquina");
+        TableColumn<EntradaT,String> column1 = new TableColumn<>("Maquina");
         column1.setCellValueFactory(new PropertyValueFactory<>("snombre"));
 
-        TableColumn<String, EntradaT> column2 = new TableColumn<>("Memoria");
+        TableColumn<EntradaT,String> column2 = new TableColumn<>("Memoria");
         column2.setCellValueFactory(new PropertyValueFactory<>("sbuffer"));
 
         tableView.getColumns().add(column1);
         tableView.getColumns().add(column2);
 
-//        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-//            if (newSelection != null) {
-//
-//            }
-//        });
 
-    //https://stackoverflow.com/questions/30191264/javafx-tableview-how-to-get-the-row-i-clicked
+        //https://stackoverflow.com/questions/30191264/javafx-tableview-how-to-get-the-row-i-clicked
         tableView.setRowFactory(tv -> {
             TableRow<EntradaT> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -101,14 +96,13 @@ public class MainApp extends Application {
                         && event.getClickCount() == 2) {
 
                     EntradaT clickedRow = row.getItem();
-                    System.out.println("Para CB: "+clickedRow.getSnombre()+"::"+clickedRow.getSbuffer());
+                    System.out.println("Para CB: " + clickedRow.getSnombre() + "::" + clickedRow.getSbuffer());
                     ecb.copiaaCB(clickedRow.getSbuffer());
                 }
             });
+                        
             return row;
         });
-
-
 
         VBox vbox = new VBox(tableView);
 

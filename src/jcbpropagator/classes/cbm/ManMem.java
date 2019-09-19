@@ -94,6 +94,7 @@ public class ManMem {
         mem.idm = this.obtenIdm();
         mem.sbuffer = scad;
         mem.md5 = md5;
+        mem.ip=ip;
         
         almem.add(mem);
         

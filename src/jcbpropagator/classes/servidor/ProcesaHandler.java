@@ -54,7 +54,7 @@ public class ProcesaHandler implements HttpHandler {
             }
         }
         //return sb.toString();
-        System.out.println("RECIBIO: "+sb.toString());
+        System.out.println("RECIBIO: "+sb.toString()+" ::: ip: "+ip.getAddress().getHostAddress());
 
         JsonObject jsono =Json.parse(sb.toString()).asObject();
         jsono.add("ip", ip.getAddress().getHostAddress());
