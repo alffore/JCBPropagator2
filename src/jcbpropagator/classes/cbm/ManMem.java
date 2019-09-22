@@ -69,6 +69,7 @@ public class ManMem {
         mem.idm = this.obtenIdm();
         mem.sbuffer = scad;
         mem.md5 = smd5;
+        mem.ip ="local";
 
         almem.add(mem);
 
