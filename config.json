@@ -6,6 +6,12 @@
         "tipo": "cliente"
     },
     {
+        "ip": "172.17.8.131",
+        "puerto": 8000,
+        "nombre": "Windows10_work",
+        "tipo": "cliente"
+    },
+    {
         "tipo": "local",
         "puerto": 8000,
         "nombre": "local"
