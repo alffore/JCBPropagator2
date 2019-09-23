@@ -216,7 +216,6 @@ public class MainApp extends Application {
     private void recuperaUltimaMemoria(Boolean oldValue, Boolean newValue) {
 
         if (newValue) {
-            //System.out.println("PrimaryStage focused : "+newValue+" ("+oldValue+")");
             ecb.recuperaObjetoCB();
         }
     }
