@@ -9,9 +9,15 @@
         "ip": "172.17.8.131",
         "puerto": 8000,
         "nombre": "Windows10_work",
-"tipo": "cliente"
-	},
-	{
+        "tipo": "cliente"
+    },
+    {
+        "ip": "172.17.8.84",
+        "puerto": 8000,
+        "nombre": "Prime2",
+        "tipo": "cliente"
+    },
+    {
         "ip": "192.168.1.71",
         "puerto": 8000,
         "nombre": "GentooCasa",
